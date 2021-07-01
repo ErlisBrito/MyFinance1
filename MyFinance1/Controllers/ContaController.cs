@@ -37,5 +37,14 @@ namespace MyFinance1.Controllers
         {
             return View();
         }
+
+        public IActionResult ExcluirConta(int id)
+        {
+            ContaModel objConta = new ContaModel(HttpContextAccessor);
+            objConta.Excluir(id);
+            return RedirectToAction("Index");
+
+
+        }
     }
 }

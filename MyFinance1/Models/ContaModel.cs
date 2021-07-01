@@ -57,6 +57,13 @@ namespace MyFinance1.Models
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
         }
+
+        public void Excluir (int id_conta)
+        {
+            new DAL().ExecutarComandoSQL("DELETE FROM Conta WHERE Id =" + id_conta);
+
+        }
+
     }
     
 }

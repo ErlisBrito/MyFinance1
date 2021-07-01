@@ -4,5 +4,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h3>Plano de Contas</h3>
 
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>#</th>
+            <th>ID</th>
+            <th>DESCRIÇÃO</th>
+            <th>TIPO</th>
+        </tr>
+    </thead>
+
+    @{
+        foreach (var item in (List<PlanoContasModel>)ViewBag.ListaPlanoContas)
+        {
+            <tbody>
+                    <tr>
+                        <td><button type="button" class="btn  btn-primary" onclick="Editar(@item.Id.ToString())">Editar</button></td>
+                        <td><button type="button" class="btn  btn-danger" onclick="Excluir(@item.Id.ToString())">Excluir</button></td>
+                        <td>@item.Id.ToString()</td>
+                        <td>@item.Descricao.ToString()</td>
+                        <td>@item.Tipo.ToString()</td>
+                    </tr>
+            </tbody>
+
+        }
+
+    }
+
+</table>
+
+
+<button type="button" class="btn btn-block btn-primary" onclick="CriarPlanoContas()">Criar Plano de Contas</button>
+
+
+<script>
+    function CriarPlanoContas()
+    {
+        window.location.href = "../PlanoContas/CriarPlanoContas";
+    }
+    function Excluir(id_conta)
+    {
+        window.location.href = "../PlanoContas/ExcluirPlanoContas/" + id_conta
+    }
+    function Editar(id_conta)
+    {
+        window.location.href = "../PlanoContas/CriarPlanoContas/" + id_conta
+    }
+</script>
