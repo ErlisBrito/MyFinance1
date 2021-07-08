@@ -9,10 +9,15 @@ namespace MyFinance1.Models
     public class ContaModel
     {
         public int Id { get; set; }
+
         [Required(ErrorMessage = "Informe o nome da Conta")]
         public string Nome { get; set; }
+       
+        public string Data { get; set; }
+
         [Required(ErrorMessage = "Informe o seu saldo")]
         public double Saldo { get; set; }
+
         public int Usuario_Id { get; set; }
         public IHttpContextAccessor HttpContextAccessor {get; set;}
 
@@ -41,7 +46,7 @@ namespace MyFinance1.Models
             {
                 item = new ContaModel();
                 item.Id = int.Parse(dt.Rows[i]["Id"].ToString());
-                item.Nome = dt.Rows[i]["Nome"].ToString();
+                item.Data = dt.Rows[i]["Nome"].ToString();
                 item.Saldo = double.Parse(dt.Rows[i]["Saldo"].ToString());
                 item.Usuario_Id = int.Parse(dt.Rows[i]["Usuario_Id"].ToString());
                 lista.Add(item);
@@ -53,7 +58,7 @@ namespace MyFinance1.Models
         public void Insert()
         {
             string id_usario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
-            string sql = $"INSERT INTO Conta(Nome, Saldo, Usuario_Id) VALUES('{Nome}','{Saldo}','{id_usario_logado}')";
+            string sql = $"INSERT INTO Conta(Nome, Saldo, Usuario_Id) VALUES('{Data}','{Saldo}','{id_usario_logado}')";
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
         }

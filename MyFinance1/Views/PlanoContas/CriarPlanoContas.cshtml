@@ -4,17 +4,20 @@
 @{
     var vDescricao = "";
     var vTipo = "";
+    var vId = 0;
 
     try
     {
+        vId = int.Parse(ViewBag.Registro.Id.ToString());
         vDescricao = ViewBag.Registro.Descricao.ToString();
         vTipo = ViewBag.Registro.Tipo.ToString();
+
     }
     catch { }
 }
 
 <form asp-controller="PlanoContas" asp-action="CriarPlanoContas">
-
+    <input type="hidden"asp-for="Id" value="@vId"/>
     <div class="form-group">
         <label>Descrição:</label>
         <input type="text" class="form-control" asp-for="@Model.Descricao" value="@vDescricao"/>

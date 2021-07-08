@@ -10,7 +10,7 @@ namespace MyFinance1.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage ="Informe a Descrição!")]
-        public string Descricao { get; set; }       
+        public string Descricao { get; set; }
         public string Tipo { get; set; }
         public int Usuario_Id { get; set; }
         public IHttpContextAccessor HttpContextAccessor { get; set; }
@@ -69,10 +69,20 @@ namespace MyFinance1.Models
 
         public void Insert()
         {
+          
             string id_usario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
-            string sql = $"INSERT INTO Plano_Contas(Descricao, Tipo, Usuario_Id) VALUES('{Descricao}','{Tipo}','{id_usario_logado}')";
+            string sql = "";
+            if (Id == 0)
+            {
+                 sql= $"INSERT INTO Plano_Contas(Descricao, Tipo, Usuario_Id) VALUES('{Descricao}','{Tipo}','{id_usario_logado}')";
+            }
+            else
+            {
+                sql = $"UPDATE Plano_Contas SET Descricao ='{Descricao}', Tipo = '{Tipo}' WHERE Usuario_Id='{id_usario_logado}' AND Id='{Id}'";
+            }
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
+
         }
         
         public void Excluir(int id_conta)
